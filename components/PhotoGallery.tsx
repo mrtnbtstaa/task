@@ -117,7 +117,11 @@ export default function PhotoGallery() {
               alt={currentItem.title}
               fill
               priority
-              sizes="(max-width: 640px) 192px, 220px"
+              // UPDATED: Added accurate sizes to prevent stretching/blurring on desktop.
+              // This tells Next.js: "On mobile it's full width, on large screens
+              // it's constrained to 80% of the container (approx 960px),
+              // so prepare an image optimized for those sizes."
+              sizes="(max-width: 768px) 100vw, (max-width: 1200px) 80vw, 960px"
               className="object-cover transition-all duration-700"
             />
 
@@ -184,7 +188,7 @@ export default function PhotoGallery() {
           </div>
         </div>
 
-        {/* Thumbnail Navigation Strip (Adjusted to grid-cols-7 for 7 items) */}
+        {/* Thumbnail Navigation Strip */}
         <div className="mt-6 grid grid-cols-4 sm:grid-cols-7 gap-2">
           {galleryItems.map((item, index) => (
             <button
@@ -200,7 +204,7 @@ export default function PhotoGallery() {
                 src={item.image}
                 alt={item.title}
                 fill
-                sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                sizes="(max-width: 640px) 25vw, (max-width: 1024px) 15vw, 10vw"
                 className="object-cover"
               />
             </button>
